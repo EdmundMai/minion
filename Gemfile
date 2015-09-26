@@ -4,3 +4,5 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'yahoo-finance'
+gem 'business_time'
+gem 'nokogiri'
