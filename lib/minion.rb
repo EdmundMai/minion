@@ -1,6 +1,5 @@
 require 'bundler/setup'
 require "minion/version"
-require "yahoo-finance"
 require "minion/dilution_finder"
 require "minion/negative_finder"
 require "minion/small_cap_finder"
@@ -18,6 +17,6 @@ module Minion
   end
 end
 
-# puts "NASDAQ: #{Minion.query("nasdaq")}"
+puts "NASDAQ: #{Minion.query("nasdaq")}"
 # puts "NYSE: #{Minion.query("nyse")}"
 

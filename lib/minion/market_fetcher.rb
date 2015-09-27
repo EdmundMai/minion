@@ -1,3 +1,5 @@
+require "yahoo-finance"
+
 class MarketFetcher
   def initialize(tickers)
     @tickers = tickers
@@ -5,11 +7,6 @@ class MarketFetcher
 
   def results
     client = YahooFinance::Client.new
-
-    all_quotes = []
-    @tickers.each_slice(200) do |batch|
-      all_quotes << client.quotes(batch, [:symbol, :last_trade_price, :average_daily_volume])
-    end
-    all_quotes.flatten
+    client.quotes(@tickers, [:symbol, :last_trade_price, :average_daily_volume])
   end
 end

@@ -6,7 +6,8 @@ class NegativeFinder < StockFinder
   def results
     client = YahooFinance::Client.new
     results = []
-    finder.results.each_with_index do |stock, index|
+    stocks = finder.results
+    stocks.each_with_index do |stock, index|
       begin
         data = client.historical_quotes(stock.symbol, { start_date: 2.business_days.ago, end_date: Time.now })
         closing_prices = data.map(&:close).map(&:to_f)
@@ -17,9 +18,9 @@ class NegativeFinder < StockFinder
 
         if negative_3_days_in_a_row && larger_than_average_volume
           results << stock
-          puts "Qualified: #{stock.symbol}, finished with #{index} out of #{finder.results.count}"
+          puts "Qualified: #{stock.symbol}, finished with #{index} out of #{stocks.count}"
         else
-          puts "Not qualified: #{stock.symbol}, finished with #{index} out of #{finder.results.count}"
+          puts "Not qualified: #{stock.symbol}, finished with #{index} out of #{stocks.count}"
         end
       rescue => e
         puts e.inspect
