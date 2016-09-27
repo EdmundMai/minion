@@ -9,8 +9,7 @@ class MarketFetcher
     all_quotes = []
     @tickers.each_slice(200) do |batch|
       all_quotes << client.quotes(batch, [:symbol, :last_trade_price, :average_daily_volume])
-      break
     end
-    all_quotes.flatten!
+    all_quotes.flatten
   end
 end
